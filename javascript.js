@@ -1,26 +1,7 @@
 let humanScore = 0;
 let ComputerScore = 0;
+let max = 3;
 
-function playGame(n){
-    
-    const max = 3;
-    
-
-    for(let i=1; i <= n;i++ ){
-
-        let choice = prompt("say your move: ")
-
-        let humanChoice = getHumanChoice(choice)
-        let computerChoice = getComputerChoice(max)
-
-        playRound(humanChoice,computerChoice)
-
-        console.log(humanScore);
-        console.log(ComputerScore);
-        
-        
-    }
-}
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -95,4 +76,42 @@ function playRound(humanChoice, computerChoice){
     else { console.log("tie") }
 }
 
-console.log(playGame(5))
+
+
+const btn = document.querySelector("button");
+
+btn.addEventListener("click", function play(e){
+    
+    for(let i; i < 5; i++){
+
+    let choice = document.getElementById("choice");
+
+    let humanChoice = getHumanChoice(choice);
+    let computerChoice = getComputerChoice(max);
+
+    playRound(humanChoice, computerChoice);
+        
+    let human = document.createElement("p");
+    let computer = document.createElement("p");
+
+    let container = document.querySelector("div");
+
+    human.textContent = humanScore;
+    computer.textContent = ComputerScore;
+
+    container.appendChild(human);
+    container.appendChild(computer);
+    
+    
+    }
+    let result = document.createElement("p");
+    
+    if (humanScore > ComputerScore){
+        result.textContent = "Ganaste!!!!";
+    }
+    else { result.textContent = "Perdiste :("; };
+
+    container.appendChild(result);
+
+    e.preventDefault();
+})
